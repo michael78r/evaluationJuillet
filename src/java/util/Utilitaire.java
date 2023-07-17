@@ -18,10 +18,26 @@ public class Utilitaire {
         int endIndex= Math.min(startIndex+isanyLigne, liste.size());
         return liste.subList(startIndex, endIndex);
     } 
+    
+        public static String[] getAll1(int nombre) {
+        String[] resu = new String[nombre];
+        String[] color = {"light", "active", "primary", "secondary", "success", "danger", "warning", "info","light","active","dark"};
+        int icolor = 0;
+        for (int i = 0; i < resu.length; i++) {
+            if (icolor == color.length) {
+                icolor = 0;
+            }
+            resu[i] = color[icolor];
+            icolor = icolor + 1;
+
+        }
+        return color;
+    }
+
 
     public static String[] getAll(int nombre) {
         String[] resu = new String[nombre];
-        String[] color = {"light", "active", "primary", "secondary", "success", "danger", "warning", "info","light","active","dark"};
+        String[] color = {"active", "primary", "secondary", "success", "danger", "warning", "info","active", "active", "primary", "secondary", "success", "danger", "warning", "info","light","active","dark"};
         int icolor = 0;
         for (int i = 0; i < resu.length; i++) {
             if (icolor == color.length) {

@@ -52,7 +52,7 @@ public abstract class DBTable {
             }
         }
         String requete = "insert into " + nomTable + " (" + tousLesAtr + ") values (" + allValues + ")";
-        // System.out.println(requete);
+        System.out.println(requete);
         PreparedStatement stmt = con.prepareStatement(requete);
 
         stmt.executeUpdate();
