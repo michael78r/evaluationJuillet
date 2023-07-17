@@ -38,7 +38,7 @@
                 </svg>
 
             </span>
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">Gestionnaire</span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2">Employe</span>
         </a>
 
     </div>
@@ -46,31 +46,43 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item ${param.activeLink == '/admin'|| param.activeLink == '/functionlogUtilisateur' ? 'active' : ''}">
-            <a href="<%=request.getContextPath()%>/admin" class="menu-link">
+        <li class="menu-item ${param.activeLink == '/utilisateur'|| param.activeLink == '/functionloginAdmin' ? 'active' : ''}">
+            <a href="<%=request.getContextPath()%>/utilisateur" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Acceuil</div>
             </a>
         </li>
 
-        <li class="menu-item ${param.activeLink == '/listepatient' ? 'active' : ''}">
-            <a href="<%=request.getContextPath()%>/listepatient" class="menu-link">
+        <li class="menu-item ${param.activeLink == '/listedevis' ? 'active' : ''}">
+            <a href="<%=request.getContextPath()%>/listedevis" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Gestion d'un patient</div>
+                <div data-i18n="Analytics">Saisie acte pour un patient et depense</div>
             </a>
         </li>
-        <li class="menu-item ${param.activeLink == '/listebudget' ? 'active' : ''}">
-            <a href="<%=request.getContextPath()%>/listebudget" class="menu-link">
+
+        <li class="menu-item ${param.activeLink == '/infopatient' ? 'active' : ''}">
+            <a href="<%=request.getContextPath()%>/infopatient?nom=" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Gestion budgetaire</div>
+                <div data-i18n="Analytics">Infos des patients</div>
             </a>
         </li>
-        <li class="menu-item ${param.activeLink == '/tableaudebord' ? 'active' : ''}">
-            <a href="<%=request.getContextPath()%>/tableaudebord" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Tableau de bord budgetaire par mois</div>
+
+
+        <li class="menu-item ${param.activeLink == '/insertionprixplace' || param.activeLink == '/benefice' || param.activeLink == '/updateprixlieu' || param.activeLink == '/ventebillet' ? 'active open' : '' } ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">Patient</div>
             </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item ${param.activeLink == '/insertionprixplace' || param.activeLink == '/benefice'  || param.activeLink == '/updateprixlieu'  || param.activeLink == '/ventebillet' ? 'active' : ''}">
+                    <a href="<%=request.getContextPath()%>/insertionprixplace" class="menu-link">
+                        <div data-i18n="Without menu">Saisie depense</div>
+                    </a>
+                </li>
+            </ul>
         </li>
+
 
     </ul>
 </aside>
