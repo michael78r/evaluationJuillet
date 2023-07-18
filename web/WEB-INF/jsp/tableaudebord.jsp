@@ -6,6 +6,11 @@
 
 
 
+<%@page import="java.math.BigDecimal"%>
+<%@page import="model.view.V_recette_total"%>
+<%@page import="model.view.V_depense_total"%>
+<%@page import="model.view.V_depense"%>
+<%@page import="model.view.V_recette"%>
 <%@page import="model.view.V_devis_depense"%>
 <%@page import="model.view.V_devis_acte"%>
 <%@page import="model.model.Devis"%>
@@ -16,9 +21,13 @@
 
 
 <%
-    ArrayList<V_devis_acte> lva = (ArrayList<V_devis_acte>) request.getAttribute("acte");
-    ArrayList<V_devis_depense> lvd = (ArrayList<V_devis_depense>) request.getAttribute("depense");
-
+    ArrayList<V_recette> lva = (ArrayList<V_recette>) request.getAttribute("r");
+    ArrayList<V_depense> lvd = (ArrayList<V_depense>) request.getAttribute("d");
+    V_recette_total tr = (V_recette_total) request.getAttribute("tr");
+    V_depense_total td = (V_depense_total) request.getAttribute("td");
+    BigDecimal br = (BigDecimal) request.getAttribute("br");
+    BigDecimal bb = (BigDecimal) request.getAttribute("bb");
+    BigDecimal rea = (BigDecimal) request.getAttribute("rea");
     //String[] table1 = Utilitaire.get2(lva.size());
     //String[] table2 = Utilitaire.get2(lvd.size());
 
@@ -43,42 +52,72 @@
 
                     <div class="content-wrapper">
                         <div class="container-xxl flex-grow-1 container-p-y">
-                            <br>
-                            <%--<div class="row g-4">--%>
-                            <div class="card">
-                                <h5 class="card-header">Acte et Depense
-                                    <button type="button" class="btn rounded-pill btn-outline-secondary"  data-bs-toggle="modal" data-bs-target="#modalCenter">
-                                        <span class="bx bx-plus"></span> ajouter
-                                    </button>
-                                </h5>   
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="modalCenterTitle">Ajouter acte et depense</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
+                                <div class="card accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo" >
+                                            <strong class="text fw-semibold"> Benefice</strong>
+                                        </button>
+                                    </h2>
+                                    <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <div class="col-4">
+                                                <form action="<%=request.getContextPath()%>/tableaudebord">
+                                                    <div class="mb-0 row">
+                                                        <div class="mb-3 row">
+                                                            <label for="html5-text-input" class="col-md-3 col-form-label" >Année</label>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" placeholder="filtrer annee" name="annee" id="html5-text-input" />
+                                                            </div>
+                                                            <label for="html5-text-input" class="col-md-3 col-form-label" >Mois</label>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" placeholder="filtrer mois" name="mois" id="html5-text-input" />
+                                                            </div>
+                                                            <button style="width:5px" type="submit" class="btn rounded-pill btn-outline-primary border-0"  data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                                                <span class="bx bx-search">Filtrer</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                       
                                         </div>
                                     </div>
                                 </div>
+
+                            </div>
+                            <br>
+                            <%--<div class="row g-4">--%>
+                            <div class="card">
+                                <h5 class="card-header"><%if (lva.size() > 0) {
+                                        out.println(Utilitaire.getMois(lva.get(0).getMois()) + " " + lva.get(0).getAnnee());
+                                    } else {
+                                        out.println("Benefice");
+                                    }%>
+                                </h5>  
+
                                 <div class="table-responsive text-nowrap">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Mois</th>
-                                                <th scope="col">Montant</th>
+                                                <th scope="col">NomBudget</th>
+                                                <th scope="col">Reel</th>
+                                                <th scope="col">Budget</th>                                              
+                                                <th scope="col">Realisation</th>
+
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
                                             <%for (int i = 0; i < lva.size(); i++) {
                                             %>
                                             <tr class="table-secondary">
-                                                <td> <%=Utilitaire.getMois(lva.get(i).getMois())%></td>
+                                                <td> <%=lva.get(i).getId()%></td>
                                                 <td> <%=lva.get(i).getPrix()%></td>
-                                            <%}%>
+                                                <td> <%=lva.get(i).getPrixannuel()%></td>                                       
+
+                                                <td> <%=lva.get(i).getRealisation()%></td>
+
+                                                <%}%>
                                         </tbody>
 
                                     </table>
@@ -90,18 +129,61 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Mois</th>
-                                                <th scope="col">Montant</th>
+                                                <th scope="col">NomBudget</th>
+                                                <th scope="col">Reel</th>
+                                                <th scope="col">Budget</th>                                              
+
+                                                <th scope="col">Realisation</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
                                             <%for (int i = 0; i < lvd.size(); i++) {
                                             %>
                                             <tr class="table-secondary">
-                                                <td> <%=Utilitaire.getMois(lvd.get(i).getMois())%></td>
+                                                <td> <%=lvd.get(i).getId()%></td>
                                                 <td> <%=lvd.get(i).getPrix()%></td>
+                                                <td> <%=lvd.get(i).getPrixannuel()%></td>
+                                                <td><%=lvd.get(i).getRealisation()%></td>
                                             </tr>
                                             <%}%>
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+
+
+
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th scope="col">Reel</th>
+                                                <th scope="col">Budget</th>                                              
+                                                <th scope="col">Realisation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                            <tr class="table-secondary">
+                                                <td>Recette</td>
+                                                <td> <%= tr.getSprix()%></td>
+                                                <td> <%= tr.getSprixannuel()%></td>
+                                                <td> <%= tr.getSr()%></td>
+                                            </tr>
+                                            <tr class="table-secondary">
+                                                <td>Depense</td>
+                                                <td> <%= td.getSprix()%></td>
+                                                <td> <%= td.getSprixannuel()%></td>
+                                                <td> <%= td.getSr()%></td>
+                                            </tr>
+                                            <tr class="table-secondary">
+                                                <td><strong>TOTAL </strong></td>
+                                                <td> <%= br%></td>
+                                                <td> <%= bb%></td>
+                                                <td><%= rea%></td>
+                                            </tr>
                                         </tbody>
 
                                     </table>

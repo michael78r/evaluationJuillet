@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.io.FileReader;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -18,12 +19,16 @@ import model.model.Utilisateur;
 import model.view.V_devis_acte;
 import model.view.V_devis_depense;
 import model.view.V_facture_devis;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import util.Pdf;
+import util.Utilitaire;
 
 /**
  *
@@ -120,15 +125,78 @@ public class UtilisateurController {
                 f.setDatefacturation(LocalDate.now().toString());
                 f.setIddevis(id[i]);
                 f.setNumero(numero);
+                f.setEtat(0);
                 f.create();
             }
         }
         ArrayList<V_facture_devis> f = new V_facture_devis().getFatureByNumero(numero);
         BigDecimal total = new V_facture_devis().getTotal(numero);
-        Pdf.facturePDF(total,f);
+        Pdf.facturePDF(total, f);
 
         //Pdf.exportpdf("C:/Users/User/Desktop/EvaluationJuillet/facture.pdf");
         model.addAttribute("activeLink", "/infopatient");
         return infopatient(model, nom);
     }
+
+    @RequestMapping(value = "/insertiondepense", method = RequestMethod.GET)
+    public String insertiondepense(Model model) throws Exception {
+        model.addAttribute("activeLink", "/insertiondepense");
+        ArrayList<Budget> depense = new Budget().getDepense();
+        model.addAttribute("depense", depense);
+        return "insertiondepense";
+    }
+
+    @RequestMapping(value = "/functionsetdepense", method = RequestMethod.GET)
+    public String setdepense(Model model, HttpServletRequest request) throws Exception {
+        int jour = Integer.parseInt(request.getParameter("jour"));
+        int annee = Integer.parseInt(request.getParameter("annee"));
+        String prix = request.getParameter("prix");
+        String nom = request.getParameter("nom");
+        String[] mois = request.getParameterValues("mois");
+
+        for (int i = 0; i < mois.length; i++) {
+            String date = annee + "-" + Utilitaire.getChiifre(Integer.parseInt(mois[i]))+"-"+Utilitaire.getChiifre(jour);
+            Devis c = new Devis();
+            c.setDate(date);
+            c.setPrix(new BigDecimal(prix));
+            c.setIdbudget(nom);
+            c.create();
+        }
+        return listedevis(model);
+    }
+
+    @RequestMapping(value = "/functionImporterCsv", method = RequestMethod.GET)
+    public String setCsv(Model model, HttpServletRequest request) throws Exception {
+        String csvFile = request.getParameter("csvFile");
+
+        try (FileReader reader = new FileReader("C:/Users/User/Documents/NetBeansProjects/EvaluationJuillet/"+csvFile);
+                CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withDelimiter(';'))) {
+
+            for (CSVRecord csvRecord : csvParser) {
+
+                String colonne1 = csvRecord.get(0);
+                String colonne2 = csvRecord.get(1);
+                String colonne3 = csvRecord.get(2);
+                Budget b = new Budget();
+                b.setCode(colonne2.toUpperCase());
+                String code = b.getIdbyCode();
+                Devis c = new Devis();
+                c.setDate(Utilitaire.getConversion(colonne1));
+                c.setIdbudget(code);
+                c.setPrix(new BigDecimal(colonne3));
+                c.create();
+            }
+            model.addAttribute("message","Importation réussie ");
+            return listedevis(model);
+
+        } catch (Exception e) {
+            model.addAttribute("erreur",e);
+            System.out.println("Erreur lors de l'importation du fichier CSV : " + e.getMessage());
+            System.out.println(csvFile);
+            return "exception";
+        }
+    }
+    
+
+    //model.addAttribute("activeLink", "/insertiondepense");
 }

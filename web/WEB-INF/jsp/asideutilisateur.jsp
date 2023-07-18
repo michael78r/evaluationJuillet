@@ -67,21 +67,13 @@
             </a>
         </li>
 
-
-        <li class="menu-item ${param.activeLink == '/insertionprixplace' || param.activeLink == '/benefice' || param.activeLink == '/updateprixlieu' || param.activeLink == '/ventebillet' ? 'active open' : '' } ">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Patient</div>
+        <li class="menu-item ${param.activeLink == '/insertiondepense' ? 'active' : ''}">
+            <a href="<%=request.getContextPath()%>/insertiondepense" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Insertion plusieurs depense par mois</div>
             </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item ${param.activeLink == '/insertionprixplace' || param.activeLink == '/benefice'  || param.activeLink == '/updateprixlieu'  || param.activeLink == '/ventebillet' ? 'active' : ''}">
-                    <a href="<%=request.getContextPath()%>/insertionprixplace" class="menu-link">
-                        <div data-i18n="Without menu">Saisie depense</div>
-                    </a>
-                </li>
-            </ul>
         </li>
+
 
 
     </ul>

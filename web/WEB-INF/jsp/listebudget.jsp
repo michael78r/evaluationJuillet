@@ -64,6 +64,18 @@
                                                                 <input class="form-control" type="text" placeholder="nom" name="nom" id="html5-text-input" />
                                                             </div>
                                                         </div>
+                                                        <div class="mb-3 row">
+                                                            <label for="html5-text-input" class="col-md-3 col-form-label" >Prix annuel</label>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="number" placeholder="prix annuel" name="prix" id="html5-text-input" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 row">
+                                                            <label for="html5-text-input" class="col-md-3 col-form-label" >Code</label>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" placeholder="code avec 3 lettres" name="code" id="html5-text-input" />
+                                                            </div>
+                                                        </div>
                                                         <div class="form-floating mb-3">
                                                             <select name="type" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                                                                 <option selected>Type budget</option>
@@ -74,6 +86,7 @@
                                                             </select>
                                                             <label for="floatingSelect">TYPE BUDGET :</label>
                                                         </div>
+
                                                     </div>
 
                                                     <div class="modal-footer">
@@ -94,8 +107,9 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nom</th>
-                                     
-                                                <th scope="col">Remboursement</th>
+                                                <th scope="col">Prix annuel</th>
+                                                <th scope="col">Type budget</th>
+                                                <th scope="col">Code</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -103,13 +117,14 @@
                                             %>
                                             <tr class="table-<%out.println(table[i]);%>">
                                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i> <strong><%=l.get(i).getNom()%></strong></td>
-
-                                                <td><%if (l.get(i).getType()== 0) {%>
+                                                <td><%=l.get(i).getPrix()%></td>
+                                                <td><%if (l.get(i).getType() == 0) {%>
                                                     <span class="badge bg-label-success me-1"><strong>ACTE</strong></span> 
                                                     <%   } else { %>
                                                     <span class="badge bg-label-warning me-1"><strong>DEPENSE</strong></span> 
                                                     <% }%>
                                                 </td>
+                                                <td><%=l.get(i).getCode()%></td>
 
                                                 <%-- <td><span class="badge bg-label-primary me-1">active</span></td> --%>
 

@@ -9,14 +9,14 @@
     <body class="fade-in">
         <div class="layout-wrapper layout-content-navbar">
             <div class="layout-container">
-                <jsp:include page="asideemploye.jsp">
+                <jsp:include page="asideutilisateur.jsp">
                     <jsp:param name="activeLink" value="<%=request.getAttribute("activeLink")%>"/>
                 </jsp:include>
                 <div class="layout-page"> 
                     <jsp:include page="navheader.jsp">
-                        <jsp:param name="nom" value="<%=session.getAttribute("nom")%>"/>
-                        <jsp:param name="id" value="<%=session.getAttribute("id")%>"/>
-                        <jsp:param name="photo" value="<%=session.getAttribute("photo")%>"/>
+                        <jsp:param name="nom" value="<%=session.getAttribute("nomutilisateur")%>"/>
+                        <jsp:param name="id" value="<%=session.getAttribute("idutilisateur")%>"/>
+                        <jsp:param name="photo" value="<%=session.getAttribute("photoutilisateur")%>"/>
                     </jsp:include>  
                     <div class="content-wrapper">
                         <div class="container-xxl flex-grow-1 container-p-y">

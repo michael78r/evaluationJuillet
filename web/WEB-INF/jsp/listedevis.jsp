@@ -241,6 +241,16 @@
                                     </table>
 
                                 </div>
+
+                                <div class="card">                                  
+                                    <form action="<%=request.getContextPath()%>/functionImporterCsv" >
+                                    <div class="card-body">
+                                            <label for="formFileDisabled" class="form-label">Import csv</label>
+                                            <input name="csvFile" class="form-control" type="file" id="formFileDisabled" required/>
+                                        <button type="submit" class="btn btn-secondary m-2">import csv (insertion depense)</button>
+                                    </div>                                   
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <%@include file="footer.jsp" %>

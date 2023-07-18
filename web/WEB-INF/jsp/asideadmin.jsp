@@ -66,7 +66,7 @@
             </a>
         </li>
         <li class="menu-item ${param.activeLink == '/tableaudebord' ? 'active' : ''}">
-            <a href="<%=request.getContextPath()%>/tableaudebord" class="menu-link">
+            <a href="<%=request.getContextPath()%>/tableaudebord?annee=2023&mois=7" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Tableau de bord budgetaire par mois</div>
             </a>

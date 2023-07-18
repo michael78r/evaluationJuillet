@@ -20,6 +20,15 @@ public class Facture extends DBTable {
     private String datefacturation;
     private String iddevis;
     private int numero;
+    private int etat;
+
+    public int getEtat() {
+        return etat;
+    }
+
+    public void setEtat(int etat) {
+        this.etat = etat;
+    }
 
     public int getNumero() {
         return numero;

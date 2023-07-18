@@ -132,7 +132,7 @@ public class V_devis_acte extends DBTable {
     public ArrayList<V_devis_acte> getFacturebyPatient(String id) throws Exception {
         Connection con = new Connexion().getConnection();
         ArrayList<V_devis_acte> lp = new ArrayList<>();
-        DBTable[] res = new V_devis_acte().find("select * from v_devis_acte where idpatient='"+id+"' and id not in (select iddevis from facture)", con);
+        DBTable[] res = new V_devis_acte().find("select * from v_devis_acte where idpatient='"+id+"' and prix>0 and id not in (select iddevis from facture)", con);
         for (int i = 0; i < res.length; i++) {
             lp.add((V_devis_acte) res[i]);
         }

@@ -8,11 +8,17 @@ package controller;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.util.ArrayList;
+import model.model.BeneficeBudget;
+import model.model.BeneficeReel;
 import model.model.Budget;
 import model.model.Devis;
 import model.model.Patient;
+import model.view.V_depense;
+import model.view.V_depense_total;
 import model.view.V_devis_acte;
 import model.view.V_devis_depense;
+import model.view.V_recette;
+import model.view.V_recette_total;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,10 +69,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/functionsetBudget", method = RequestMethod.GET)
-    public String setBudget(Model model, @RequestParam String nom, @RequestParam int type) throws Exception {
+    public String setBudget(Model model, @RequestParam String nom, @RequestParam int type, @RequestParam String prix, @RequestParam String code) throws Exception {
         Budget c = new Budget();
         c.setNom(nom);
         c.setType(type);
+        c.setPrix(new BigDecimal(prix));
+        c.setCode(code);
         c.create();
         return listebudget(model);
     }
@@ -81,13 +89,55 @@ public class AdminController {
 
     //tableau de bord
     @RequestMapping(value = "/tableaudebord", method = RequestMethod.GET)
-    public String tableaudebord(Model model) throws Exception {
-        ArrayList<V_devis_acte> va = new V_devis_acte().getActebymonth(2023);
-        ArrayList<V_devis_depense> vd = new V_devis_depense().getDepensebymonth(2023);
-        model.addAttribute("acte", va);
-        model.addAttribute("depense", vd);
+    public String tableaudebord(Model model, @RequestParam int annee, @RequestParam int mois) throws Exception {
+
+        try{
+        
+        V_recette rec = new V_recette();
+        rec.setMois(mois);
+        rec.setAnnee(annee);
+        ArrayList<V_recette> r = rec.getRecette();
+        V_depense dep = new V_depense();
+        dep.setMois(mois);
+        dep.setAnnee(annee);
+        ArrayList<V_depense> d = dep.getDepense();
+
+        V_recette_total rtotal = new V_recette_total();
+        rtotal.setAnnee(annee);
+        rtotal.setMois(mois);
+        V_recette_total tr = rtotal.getTotalRecette();
+
+        V_depense_total dtotal = new V_depense_total();
+        dtotal.setAnnee(annee);
+        dtotal.setMois(mois);
+        V_depense_total td = dtotal.getTotalDepense();
+
+        BeneficeReel b = new BeneficeReel();
+        b.setDepense(td);
+        b.setRecette(tr);
+        BigDecimal br = b.getBeneficeReel();
+
+        BeneficeBudget bt = new BeneficeBudget();
+        bt.setDepense(td);
+        bt.setRecette(tr);
+        BigDecimal bb = bt.getBeneficeBudget();
+        bt.setBr(b);
+        BigDecimal rea = bt.getR();
+
+        model.addAttribute("rea", rea);
+        model.addAttribute("br", br);
+        model.addAttribute("bb", bb);
+        model.addAttribute("tr", tr);
+        model.addAttribute("td", td);
+        model.addAttribute("r", r);
+        model.addAttribute("d", d);
         model.addAttribute("activeLink", "/tableaudebord");
         return "tableaudebord";
+        }
+        catch(Exception e){
+            model.addAttribute("erreur",e.getMessage());
+            return "exception";
+        }
     }
 
 }
