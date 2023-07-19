@@ -107,9 +107,9 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nom</th>
-                                                <th scope="col">Prix annuel</th>
-                                                <th scope="col">Type budget</th>
-                                                <th scope="col">Code</th>
+                                                <th scope="col"  style="text-align: right;">Prix annuel</th>
+                                                <th scope="col"  style="text-align: right;">Type budget</th>
+                                                <th scope="col"  style="text-align: right;">Code</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -117,14 +117,14 @@
                                             %>
                                             <tr class="table-<%out.println(table[i]);%>">
                                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i> <strong><%=l.get(i).getNom()%></strong></td>
-                                                <td><%=l.get(i).getPrix()%></td>
-                                                <td><%if (l.get(i).getType() == 0) {%>
+                                                <td  style="text-align: right;"><%=Utilitaire.alignement(l.get(i).getPrix())%></td>
+                                                <td  style="text-align: right;"><%if (l.get(i).getType() == 0) {%>
                                                     <span class="badge bg-label-success me-1"><strong>ACTE</strong></span> 
                                                     <%   } else { %>
                                                     <span class="badge bg-label-warning me-1"><strong>DEPENSE</strong></span> 
                                                     <% }%>
                                                 </td>
-                                                <td><%=l.get(i).getCode()%></td>
+                                                <td  style="text-align: right;"><%=l.get(i).getCode()%></td>
 
                                                 <%-- <td><span class="badge bg-label-primary me-1">active</span></td> --%>
 

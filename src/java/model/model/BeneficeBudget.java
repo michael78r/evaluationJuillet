@@ -55,7 +55,7 @@ public class BeneficeBudget {
     
     public BigDecimal getR(){
         BigDecimal res = new BigDecimal(0);
-        res = getBr().getBeneficeReel().multiply(new BigDecimal(100)).divide(getBeneficeBudget(), 0, RoundingMode.HALF_UP);
+        res = getBr().getBeneficeReel().multiply(new BigDecimal(100)).divide(getBeneficeBudget(), 2, RoundingMode.HALF_UP);
         return res;
     }
 

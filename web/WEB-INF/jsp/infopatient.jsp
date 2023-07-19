@@ -1,4 +1,5 @@
 
+<%@page import="util.Utilitaire"%>
 <%@page import="model.view.V_facture_devis"%>
 <%@page import="model.model.Facture"%>
 <%@page import="model.view.V_devis_acte"%>
@@ -79,9 +80,9 @@
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Nom Patient</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Prix</th>
-                                                            <th scope="col">Nom budget</th>
+                                                            <th scope="col" style="text-align: right;">Date</th>
+                                                            <th scope="col" style="text-align: right;">Prix</th>
+                                                            <th scope="col" style="text-align: right;">Nom budget</th>
 
                                                         </tr>
                                                     </thead>
@@ -90,9 +91,9 @@
                                                     <tbody class="table">                                                
                                                         <tr class="table-info" >
                                                             <td> <%=l.get(i).getNompatient()%></td>
-                                                            <td> <%=l.get(i).getDate()%></td>
-                                                            <td> <%=l.get(i).getPrix()%></td>
-                                                            <td> <%=l.get(i).getNombudget()%></td>
+                                                            <td style="text-align: right;"> <%=Utilitaire.conversionDate(l.get(i).getDate())%></td>
+                                                            <td style="text-align: right;"> <%=Utilitaire.alignement(l.get(i).getPrix())%></td>
+                                                            <td style="text-align: right;"> <%=l.get(i).getNombudget()%></td>
 
                                                             <td> <input name="id" type="checkbox" value="<%=l.get(i).getId()%>"  />
                                                                 <input name="nom" value="<%=l.get(i).getIdpatient()%>" hidden  />
@@ -130,11 +131,11 @@
                                                                     <thead>
                                                                         <tr>
                                                                              <th scope="col">Date facturation</th>
-                                                                            <th scope="col">Nom Patient</th>
-                                                                            <th scope="col">Date</th>
-                                                                            <th scope="col">Prix</th>
-                                                                            <th scope="col">Nom budget</th>
-                                                                            <th scope="col">TOTAL</th>
+                                                                            <th style="text-align: right;" scope="col">Nom Patient</th>
+                                                                            <th style="text-align: right;" scope="col">Date</th>
+                                                                            <th style="text-align: right;"  scope="col">Prix</th>
+                                                                            <th  style="text-align: right;" scope="col">Nom budget</th>
+                                                                            <th style="text-align: right;" scope="col">TOTAL</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <%    for (int i = 0; i < f.size(); i++) {
@@ -144,11 +145,11 @@
                                                                             data-bs-toggle="offcanvas"
                                                                             data-bs-target="#offcanvasScroll"
                                                                             aria-controls="offcanvasScroll">
-                                                                            <td> <%=f.get(i).getDatefacturation()%></td>
-                                                                            <td> <%=f.get(i).getNompatient()%></td>
-                                                                            <td> <%=f.get(i).getDate()%></td>
-                                                                            <td> <%=f.get(i).getPrix()%></td>
-                                                                            <td> <%=f.get(i).getNombudget()%></td>
+                                                                            <td> <%=Utilitaire.conversionDate(f.get(i).getDatefacturation())%></td>
+                                                                            <td style="text-align: right;"> <%=f.get(i).getNompatient()%></td>
+                                                                            <td style="text-align: right;"> <%=Utilitaire.conversionDate(f.get(i).getDate())%></td>
+                                                                            <td style="text-align: right;"> <%=Utilitaire.alignement(f.get(i).getPrix())%></td>
+                                                                            <td style="text-align: right;"> <%=f.get(i).getNombudget()%></td>
                                                                             <td></td>
                                                                             <%}%>
 

@@ -6,8 +6,11 @@
 package main;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import model.model.BeneficeBudget;
 import model.model.BeneficeReel;
 import model.model.Budget;
@@ -27,6 +30,19 @@ import util.Utilitaire;
 public class main {
 
     public static void main(String[] args) throws Exception {
+        
+        String dateString = "2023-07-19";
+
+        LocalDate date = LocalDate.parse(dateString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.FRENCH);
+        String formattedDate = formatter.format(date);
+
+        System.out.println(formattedDate);
+
+
+        //String formattedNumber = decimalFormat.format(number);
+
+       /*/ System.out.println(formattedNumber);
         /* int mois = 6;
         int annee= 2023;
         V_recette rec = new V_recette();

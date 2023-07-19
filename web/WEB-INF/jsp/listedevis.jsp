@@ -153,9 +153,9 @@
                                                 <th scope="col">NomBudget</th>
 
                                                 <th scope="col">Date</th>
-                                                <th scope="col">Prix</th>
-                                                <th scope="col">NomPatient</th>
-                                                <th scope="col">TypeBudget</th>
+                                                <th style="text-align: right;" scope="col">Prix</th>
+                                                <th style="text-align: right;" scope="col">NomPatient</th>
+                                                <th style="text-align: right;" scope="col">TypeBudget</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -163,12 +163,12 @@
                                             %>
                                             <tr class="table-<%out.println(table1[i]);%>">
                                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"> </i><strong><%=lva.get(i).getNombudget()%></strong></td>
-                                                <td> <%=lva.get(i).getDate()%></td>
-                                                <td> <%=lva.get(i).getPrix()%></td>
-                                                <td><i class="fab fa-sketch fa-lg text-warning me-3"><a href="<%= request.getContextPath()%>/benefice?idspectacle=<%= lva.get(i).getId()%>"> <%=lva.get(i).getNompatient()%></a></i></td>
+                                                <td> <%=Utilitaire.conversionDate(lva.get(i).getDate())%></td>
+                                                <td style="text-align: right;"> <%=Utilitaire.alignement(lva.get(i).getPrix())%></td>
+                                                <td style="text-align: right;"><i class="fab fa-sketch fa-lg text-warning me-3"><a href="<%= request.getContextPath()%>/benefice?idspectacle=<%= lva.get(i).getId()%>"> <%=lva.get(i).getNompatient()%></a></i></td>
 
 
-                                                <td><%if (lva.get(i).getType() == 0) {%>
+                                                <td style="text-align: right;"><%if (lva.get(i).getType() == 0) {%>
                                                     <span class="badge bg-label-success me-1"><strong>ACTE</strong></span> 
                                                     <%   } else { %>
                                                     <span class="badge bg-label-warning me-1"><strong>DEPENSE</strong></span> 
@@ -203,8 +203,8 @@
                                                 <th scope="col">NomBudget</th>
 
                                                 <th scope="col">Date</th>
-                                                <th scope="col">Prix</th>
-                                                <th scope="col">TypeBudget</th>
+                                                <th scope="col"  style="text-align: right;">Prix</th>
+                                                <th scope="col"  style="text-align: right;">TypeBudget</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -212,10 +212,10 @@
                                             %>
                                             <tr class="table-<%out.println(table2[i]);%>">
                                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"> </i><strong><%=lvd.get(i).getNombudget()%></strong></td>
-                                                <td> <%=lvd.get(i).getDate()%></td>
-                                                <td> <%=lvd.get(i).getPrix()%></td>
+                                                <td> <%=Utilitaire.conversionDate(lvd.get(i).getDate())%></td>
+                                                <td  style="text-align: right;"> <%=Utilitaire.alignement(lvd.get(i).getPrix())%></td>
 
-                                                <td><%if (lvd.get(i).getType() == 0) {%>
+                                                <td  style="text-align: right;"><%if (lvd.get(i).getType() == 0) {%>
                                                     <span class="badge bg-label-success me-1"><strong>ACTE</strong></span> 
                                                     <%   } else { %>
                                                     <span class="badge bg-label-warning me-1"><strong>DEPENSE</strong></span> 

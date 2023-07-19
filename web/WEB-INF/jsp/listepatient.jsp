@@ -114,7 +114,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nom</th>
-                                                <th scope="col">Date de naissance</th>
+                                                <th scope="col" >Date de naissance</th>
                                                  <th scope="col">Genre</th>
                                                 <th scope="col">Remboursement</th>
                                             </tr>
@@ -124,7 +124,7 @@
                                             %>
                                             <tr class="table-<%out.println(table[i]);%>">
                                                 <td><i class="fab fa-sketch fa-lg text-warning me-3"></i> <strong><%=l.get(i).getNom()%></strong></td>
-                                                <td><%=l.get(i).getDatenaissance()%></td>
+                                                <td><%=Utilitaire.conversionDate(l.get(i).getDatenaissance())%></td>
                                                  <td><%=l.get(i).getGenre()%></td>
                                                 <td><%if (l.get(i).getRemboursement() == 0) {%>
                                                     <span class="badge bg-label-success me-1"><strong>TRUE</strong></span> 

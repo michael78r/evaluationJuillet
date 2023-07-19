@@ -101,9 +101,9 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">NomBudget</th>
-                                                <th scope="col">Reel</th>
-                                                <th scope="col">Budget</th>                                              
-                                                <th scope="col">Realisation</th>
+                                                <th style="text-align: right;">Reel</th>
+                                                <th style="text-align: right;">Budget</th>                                              
+                                                <th style="text-align: right;">Realisation</th>
 
                                             </tr>
                                         </thead>
@@ -111,11 +111,11 @@
                                             <%for (int i = 0; i < lva.size(); i++) {
                                             %>
                                             <tr class="table-secondary">
-                                                <td> <%=lva.get(i).getId()%></td>
-                                                <td> <%=lva.get(i).getPrix()%></td>
-                                                <td> <%=lva.get(i).getPrixannuel()%></td>                                       
+                                                <td> <%=lva.get(i).getNombudget()%></td>
+                                                <td style="text-align: right;"> <%=Utilitaire.alignement(lva.get(i).getPrix())%></td>
+                                                <td style="text-align: right;"> <%=Utilitaire.alignement(lva.get(i).getPrixannuel())%></td>                                       
 
-                                                <td> <%=lva.get(i).getRealisation()%></td>
+                                                <td style="text-align: right;"> <%=lva.get(i).getRealisation()%></td>
 
                                                 <%}%>
                                         </tbody>
@@ -130,20 +130,19 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">NomBudget</th>
-                                                <th scope="col">Reel</th>
-                                                <th scope="col">Budget</th>                                              
-
-                                                <th scope="col">Realisation</th>
+                                                <th style="text-align: right;">Reel</th>
+                                                <th style="text-align: right;">Budget</th>                                              
+                                                <th style="text-align: right;">Realisation</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
                                             <%for (int i = 0; i < lvd.size(); i++) {
                                             %>
                                             <tr class="table-secondary">
-                                                <td> <%=lvd.get(i).getId()%></td>
-                                                <td> <%=lvd.get(i).getPrix()%></td>
-                                                <td> <%=lvd.get(i).getPrixannuel()%></td>
-                                                <td><%=lvd.get(i).getRealisation()%></td>
+                                                <td > <%=lvd.get(i).getNombudget()%></td>
+                                                <td style="text-align: right;"> <%=Utilitaire.alignement(lvd.get(i).getPrix())%></td>
+                                                <td style="text-align: right;"> <%=Utilitaire.alignement(lvd.get(i).getPrixannuel())%></td>
+                                                <td style="text-align: right;"><%=lvd.get(i).getRealisation()%></td>
                                             </tr>
                                             <%}%>
                                         </tbody>
@@ -160,29 +159,29 @@
                                         <thead>
                                             <tr>
                                                 <th></th>
-                                                <th scope="col">Reel</th>
-                                                <th scope="col">Budget</th>                                              
-                                                <th scope="col">Realisation</th>
+                                                <th style="text-align: right;">Reel</th>
+                                                <th style="text-align: right;">Budget</th>                                              
+                                                <th style="text-align: right;">Realisation</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
                                             <tr class="table-secondary">
                                                 <td>Recette</td>
-                                                <td> <%= tr.getSprix()%></td>
-                                                <td> <%= tr.getSprixannuel()%></td>
-                                                <td> <%= tr.getSr()%></td>
+                                                <td style="text-align: right;"> <%= Utilitaire.alignement(tr.getSprix())%></td>
+                                                <td style="text-align: right;"> <%= Utilitaire.alignement(tr.getSprixannuel())%></td>
+                                                <td style="text-align: right;"> <%= tr.getSr()%></td>
                                             </tr>
                                             <tr class="table-secondary">
                                                 <td>Depense</td>
-                                                <td> <%= td.getSprix()%></td>
-                                                <td> <%= td.getSprixannuel()%></td>
-                                                <td> <%= td.getSr()%></td>
+                                                <td style="text-align: right;"> <%= Utilitaire.alignement(td.getSprix())%></td>
+                                                <td style="text-align: right;"> <%= Utilitaire.alignement(td.getSprixannuel())%></td>
+                                                <td style="text-align: right;"> <%= td.getSr()%></td>
                                             </tr>
                                             <tr class="table-secondary">
                                                 <td><strong>TOTAL </strong></td>
-                                                <td> <%= br%></td>
-                                                <td> <%= bb%></td>
-                                                <td><%= rea%></td>
+                                                <td style="text-align: right;"> <%= Utilitaire.alignement(br)%></td>
+                                                <td style="text-align: right;"> <%= Utilitaire.alignement(bb)%></td>
+                                                <td style="text-align: right;"><%= rea%></td>
                                             </tr>
                                         </tbody>
 

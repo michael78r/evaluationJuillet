@@ -70,7 +70,7 @@ public class V_depense_total extends DBTable {
         V_depense_total t = new V_depense_total();
         String query = "SELECT a.*,  COALESCE(r.annee, "+getAnnee()+") AS annee,  COALESCE(r.mois, "+getMois()+") AS mois, COALESCE(r.prix, 0) AS prix, COALESCE(r.realisation, 0) AS realisation "
                 + "FROM v_dep a LEFT JOIN v_alldepense r ON r.idbudget = a.id AND r.mois = "+getMois()+" and annee="+getAnnee();
-        DBTable res = t.find("select mois,annee,sum(prix) as sprix, sum(prixannuel) as sprixannuel, round(((sum(prix)*100)/sum(prixannuel)),2) as sr from ("+query+") as subquery group by mois,annee", con)[0];
+        DBTable res = t.find("select mois,annee,sum(prix) as sprix, sum(prixannuel) as sprixannuel, round(((sum(prix)*100)/sum(prixannuel)),2) as sr from ("+query+") as totaldep group by mois,annee", con)[0];
         t = (V_depense_total) res;
         return t;
     }

@@ -190,7 +190,7 @@ public abstract class DBTable {
         while (res.next()) {
             DBTable.addElement(getDbObject(res));
         }
-        //con.close();
+        con.close();
         DBTable[] allDb = new DBTable[DBTable.size()];
         for (int i = 0; i < allDb.length; i++) {
             allDb[i] = ((DBTable) DBTable.elementAt(i));
